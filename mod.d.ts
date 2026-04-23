@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,20 +16,11 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
 
-// MODULES //
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@main/index.d.ts"/>
 
-var reinterpret = require( '@stdlib/strided-base-reinterpret-boolean' );
-var ndarray = require( '@stdlib/ndarray-base-ctor' );
-var getShape = require( '@stdlib/ndarray-base-shape' );
-var getStrides = require( '@stdlib/ndarray-base-strides' );
-var getOffset = require( '@stdlib/ndarray-base-offset' );
-var getOrder = require( '@stdlib/ndarray-base-order' );
-var getData = require( '@stdlib/ndarray-base-data-buffer' );
-
-
-// MAIN //
+import { boolndarray, uint8ndarray } from '@stdlib/types/ndarray';
 
 /**
 * Reinterprets a boolean ndarray as an unsigned 8-bit integer ndarray.
@@ -39,29 +30,21 @@ var getData = require( '@stdlib/ndarray-base-data-buffer' );
 * -   The returned ndarray is a view on the input ndarray data buffer.
 * -   The returned ndarray is a "base" ndarray, and, thus, the returned ndarray does not perform bounds checking or afford any of the guarantees of the non-base ndarray constructor. The primary intent of this function is to reinterpret an ndarray-like object within internal implementations and to do so with minimal overhead.
 *
-* @param {ndarray} x - input ndarray
-* @returns {ndarray} unsigned 8-bit integer ndarray view
+* @param x - input ndarray
+* @returns unsigned 8-bit integer ndarray view
 *
 * @example
-* var falses = require( '@stdlib/ndarray-base-falses' );
+* var zeros = require( '@stdlib/ndarray-base-zeros' );
 *
-* var x = falses( 'bool', [ 2, 2 ], 'row-major' );
+* var x = zeros( 'bool', [ 2, 2 ], 'row-major' );
 * // returns <ndarray>[ [ false, false ], [ false, false ] ]
 *
 * var out = reinterpretBoolean( x );
 * // returns <ndarray>[ [ 0, 0 ], [ 0, 0 ] ]
 */
-function reinterpretBoolean( x ) {
-	var strides;
-	var shape;
-
-	shape = getShape( x, true );
-	strides = getStrides( x, true );
-
-	return ndarray( 'uint8', reinterpret( getData( x ), 0 ), shape, strides, getOffset( x ), getOrder( x ) );
-}
+declare function reinterpretBoolean( x: boolndarray ): uint8ndarray;
 
 
 // EXPORTS //
 
-module.exports = reinterpretBoolean;
+export = reinterpretBoolean;
